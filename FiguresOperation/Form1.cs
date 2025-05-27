@@ -38,5 +38,27 @@ namespace FiguresOperation
             frm.BringToFront();
             frm.Show();
         }
+
+        private void romboideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmRomboide frm = FrmRomboide.GetInstance();
+            frm.MdiParent = this;
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.Location = new Point(0, 0);
+            frm.WindowState = FormWindowState.Maximized;
+            frm.BringToFront();
+            frm.Show();
+        }
+
+        private void trapezoideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmTrapezoide frm = FrmTrapezoide.GetInstance();
+            frm.MdiParent = this;
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.Location = new Point(0, 0);
+            frm.WindowState = FormWindowState.Maximized;
+            frm.BringToFront();
+            frm.Show();
+        }
     }
 }

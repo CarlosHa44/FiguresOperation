@@ -68,12 +68,14 @@
             this.romboideToolStripMenuItem.Name = "romboideToolStripMenuItem";
             this.romboideToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.romboideToolStripMenuItem.Text = "Romboide";
+            this.romboideToolStripMenuItem.Click += new System.EventHandler(this.romboideToolStripMenuItem_Click);
             // 
             // trapezoideToolStripMenuItem
             // 
             this.trapezoideToolStripMenuItem.Name = "trapezoideToolStripMenuItem";
             this.trapezoideToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.trapezoideToolStripMenuItem.Text = "Trapezoide";
+            this.trapezoideToolStripMenuItem.Click += new System.EventHandler(this.trapezoideToolStripMenuItem_Click);
             // 
             // Form1
             // 
