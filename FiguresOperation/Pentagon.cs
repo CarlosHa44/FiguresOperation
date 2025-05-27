@@ -4,10 +4,9 @@ using System.Windows.Forms;
 
 namespace FiguresOperation
 {
-    internal class Rhombus
+    internal class Pentagon
     {
-        private float mDiagonal1; // Diagonal mayor
-        private float mDiagonal2; // Diagonal menor
+        private float mSideLength; // Longitud del lado
         private float mPerimeter;
         private float mArea;
 
@@ -19,9 +18,9 @@ namespace FiguresOperation
         private const float SF = 20;
         private Pen mPen;
 
-        public Rhombus()
+        public Pentagon()
         {
-            mDiagonal1 = 0.0f; mDiagonal2 = 0.0f;
+            mSideLength = 0.0f;
             mPerimeter = 0.0f; mArea = 0.0f;
             mPen = new Pen(Color.Blue, 3);
         }
@@ -53,12 +52,11 @@ namespace FiguresOperation
             mScale = 1.0f;
         }
 
-        public void ReadData(TextBox txtDiagonal1, TextBox txtDiagonal2)
+        public void ReadData(TextBox txtSideLength)
         {
             try
             {
-                mDiagonal1 = float.Parse(txtDiagonal1.Text);
-                mDiagonal2 = float.Parse(txtDiagonal2.Text);
+                mSideLength = float.Parse(txtSideLength.Text);
             }
             catch
             {
@@ -66,31 +64,30 @@ namespace FiguresOperation
             }
         }
 
-        public void PerimeterRhombus()
+        public void CalculatePerimeter()
         {
-            float side = (float)Math.Sqrt(Math.Pow(mDiagonal1 / 2, 2) + Math.Pow(mDiagonal2 / 2, 2));
-            mPerimeter = 4 * side;
+            mPerimeter = 5 * mSideLength;
         }
 
-        public void AreaRhombus()
+        public void CalculateArea()
         {
-            mArea = (mDiagonal1 * mDiagonal2) / 2;
+            mArea = (5f / 4f) * mSideLength * mSideLength * 1.37638192047f;
         }
 
         public void PrintData(TextBox txtPerimeter, TextBox txtArea)
         {
             txtPerimeter.Text = mPerimeter.ToString();
-            txtArea.Text = mArea.ToString();
+            txtArea.Text = mArea.ToString("0.00");
         }
 
-        public void InitializeData(TextBox txtDiagonal1, TextBox txtDiagonal2, TextBox txtPerimeter, TextBox txtArea, PictureBox picCanvas)
+        public void InitializeData(TextBox txtSideLength, TextBox txtPerimeter, TextBox txtArea, PictureBox picCanvas)
         {
-            mDiagonal1 = 0.0f; mDiagonal2 = 0.0f;
+            mSideLength = 0.0f;
             mPerimeter = 0.0f; mArea = 0.0f;
 
-            txtDiagonal1.Text = ""; txtDiagonal2.Text = "";
+            txtSideLength.Text = "";
             txtPerimeter.Text = ""; txtArea.Text = "";
-            txtDiagonal1.Focus();
+            txtSideLength.Focus();
             picCanvas.Refresh();
         }
 
@@ -102,15 +99,20 @@ namespace FiguresOperation
             float centerX = picCanvas.Width / 2.0f + mPosition.X;
             float centerY = picCanvas.Height / 2.0f + mPosition.Y;
 
-            // Calculate rhombus dimensions
-            float d1 = mDiagonal1 * SF * mScale;
-            float d2 = mDiagonal2 * SF * mScale;
+            float side = mSideLength * SF * mScale;
 
-            PointF[] points = new PointF[4];
-            points[0] = new PointF(0, -d2 / 2);    // Top
-            points[1] = new PointF(d1 / 2, 0);     // Right
-            points[2] = new PointF(0, d2 / 2);      // Bottom
-            points[3] = new PointF(-d1 / 2, 0);     // Left
+            PointF[] points = new PointF[5];
+
+            for (int i = 0; i < 5; i++)
+            {
+                double angle = 2 * Math.PI * i / 5 - Math.PI / 2; 
+                float radius = side / (2f * (float)Math.Sin(Math.PI / 5)); 
+
+                points[i] = new PointF(
+                    radius * (float)Math.Cos(angle),
+                    radius * (float)Math.Sin(angle)
+                );
+            }
 
             if (mRotation != 0)
             {

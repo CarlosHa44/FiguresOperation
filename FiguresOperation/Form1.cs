@@ -27,5 +27,16 @@ namespace FiguresOperation
             frm.BringToFront();
             frm.Show();
         }
+
+        private void pentagonoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmPentagono frm = FrmPentagono.GetInstance();
+            frm.MdiParent = this;
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.Location = new Point(0, 0);
+            frm.WindowState = FormWindowState.Maximized;
+            frm.BringToFront();
+            frm.Show();
+        }
     }
 }
